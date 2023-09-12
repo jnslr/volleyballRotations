@@ -1,0 +1,105 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Volleyball Rotations</title>
+    <!-- Pull in the source files -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-yaml/4.1.0/js-yaml.min.js" integrity="sha512-CSBhVREyzHAjAFfBlIBakjoRUKp5h7VSweP0InR/pAJyptH7peuhCsqAI/snV+TwZmXZqoUklpXp6R6wMnYf5Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/snap.svg/0.4.1/snap.svg-min.js" integrity="sha512-PtnRurZm07A0j27+J1/3m160UiCHTGeMoLTtK70vdm9csIPlMu/KMfglomIcPoQV14EqrnGqYupUvJXBWoFxUg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://monkeysppp.github.io/VBRotations/src/js/vbCourts.js"></script>
+  </head>
+  <style>
+    .grid-container {
+      display: grid;
+      grid-template-columns: auto 20%;
+      gap: 10px;
+      background-color: #2196F3;
+      padding: 10px;
+    }
+    </style>
+  <body>
+    <!-- Create a div element to attach the SVG onto -->
+    <div id="app" class="grid-container">
+      <h1 style="grid-column: 1/2;">4-2 System</h1>
+      <h2 style="grid-column: 1/2;">VarianteB: Mit Zuspiel von Position2<br>Vorgezogene 6</h2>
+      <div id="court" style="grid-column: 1/1; grid-row-start: span 4;"></div>
+      <select v-model="currentRot" :disabled="lock" style="grid-column: 2/2;">
+        <option v-for="rot in rotations" :value="rot">{{rot.name}}</option>
+      </select>
+      <select v-model="currentState" :disabled="lock" style="grid-column: 2/2;">
+        <option v-for="state in currentRot.states" :value="state">{{state.name}}</option>
+      </select>
+      <p style="grid-column: 1/2;">
+        Legende:<br>
+        <b>Z</b>: Zuspieler(in) <b>D</b>: Diagonalangreifer(in) <b>M</b>: Mittelblocker(in) <b>A</b>: Außenangreifer(in) <b>U</b>: Universalspieler(in)<br>
+        <b>1..6</b>: Aktuelle Position auf dem Spielfeld<br>
+        Bsp: <b>Z4</b>: Zuspieler(in) die aktuell auf Position IV steht
+      </p>
+    </div>   
+  </body>
+
+  <script>    
+    const { createApp } = Vue
+    window.app = createApp({
+      data() {
+        return {
+          court: null,
+          currentRot: {},
+          currentState: {},
+          lock: false,
+          rotations: []
+        }
+      },
+      async mounted(){
+        res = await fetch("./4-2B_Front6.yml")
+        this.rotations = jsyaml.load(await res.text())
+        this.currentRot = this.rotations[0]
+        await this.resetCourt()
+      },
+      methods: {
+        resetCourt: async function(){
+          courtDiv = document.getElementById('court')
+          courtDiv.innerHTML = '';
+
+          
+          this.court = new VBHalfCourt({ width: courtDiv.getBoundingClientRect().width-20 })
+
+          courtDiv.appendChild(this.court.getSVG())
+          await this.court.draw(0)
+        },
+        drawPlayers: async function() {
+          //console.log(this.currentState.players)
+          for (const p of this.currentState.players) {
+            await this.court.addPlayer(p.x, p.y, p.name)
+          }
+          await this.court.draw(0)
+        },
+        movePlayers: async function() {
+          for (const p in this.currentState.players) {
+            await this.court.players[p].setPosition(this.currentState.players[p].x, this.currentState.players[p].y)
+          }
+          await this.court.draw(1500)
+        }
+      },
+      watch: {
+        async 'currentRot'(newValue) {
+          console.log("new Rotations")
+          this.lock = true
+          this.currentState = this.currentRot.states[0]
+          await this.resetCourt()
+          await this.drawPlayers()
+          this.lock = false
+        },
+        async 'currentState'(newValue) {
+          console.log("new State")
+          if (this.lock) { //Already locked by draw Court --> Do not move players
+            return
+          }
+          this.lock = true
+          await this.movePlayers()
+          this.lock = false
+        }
+      }
+    }).mount('#app')
+  </script>
+</html>
