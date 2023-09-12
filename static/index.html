@@ -24,10 +24,10 @@
       <h1 style="grid-column: 1/2;">4-2 System</h1>
       <h2 style="grid-column: 1/2;">VarianteB: Mit Zuspiel von Position2<br>Vorgezogene 6</h2>
       <div id="court" style="grid-column: 1/1; grid-row-start: span 4;"></div>
-      <select v-model="currentRot" :disabled="lock" style="grid-column: 2/2; min-height: 50px;">
+      <select v-model="currentRot" :disabled="lock" style="grid-column: 2/2; min-height: 50px; -webkit-appearance: none;">
         <option v-for="rot in rotations" :value="rot">{{rot.name}}</option>
       </select>
-      <select v-model="currentState" :disabled="lock" style="grid-column: 2/2; min-height: 50px;">
+      <select v-model="currentState" :disabled="lock" style="grid-column: 2/2; min-height: 50px; -webkit-appearance: none;">
         <option v-for="state in currentRot.states" :value="state">{{state.name}}</option>
       </select>
       <p style="grid-column: 1/2;">
