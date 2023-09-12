@@ -6,74 +6,82 @@
     - { 'x': 200, 'y': 100, 'name': Z4}
     - { 'x': 450, 'y': 100, 'name': U3}
     - { 'x': 700, 'y': 100, 'name': U2}
+    
     - { 'x': 200, 'y': 500, 'name': U5}
     - { 'x': 450, 'y': 500, 'name': U6}
     - { 'x': 700, 'y': 500, 'name': Z1}
   - name: Annahme
     players:
     - { 'x': 040, 'y': 100, 'name': Z4}
-    - { 'x': 200, 'y': 100, 'name': U3}
-    - { 'x': 700, 'y': 100, 'name': U2}
-    - { 'x': 200, 'y': 500, 'name': U5}
+    - { 'x': 150, 'y': 400, 'name': U3}
+    - { 'x': 750, 'y': 400, 'name': U2}
+    
+    - { 'x': 250, 'y': 700, 'name': U5}
     - { 'x': 450, 'y': 500, 'name': U6}
-    - { 'x': 700, 'y': 500, 'name': Z1}
+    - { 'x': 650, 'y': 700, 'name': Z1}
   - name: Zielaufstellung
     players:
     - { 'x': 750, 'y': 100, 'name': Z4}
-    - { 'x': 450, 'y': 100, 'name': U3}
-    - { 'x': 150, 'y': 100, 'name': U2}
+    - { 'x': 150, 'y': 100, 'name': U3}
+    - { 'x': 450, 'y': 100, 'name': U2}
     - { 'x': 200, 'y': 700, 'name': U5}
     - { 'x': 700, 'y': 700, 'name': U6}
     - { 'x': 450, 'y': 450, 'name': Z1}
-- name: Zuspieler auf III und IV
+- name: Zuspieler auf III und VI
   states:
   - name: Grundaufstellung
     players: 
-    - { 'x': 200, 'y': 100, 'name': Z4}
-    - { 'x': 450, 'y': 100, 'name': U3}
+    - { 'x': 200, 'y': 100, 'name': U4}
+    - { 'x': 450, 'y': 100, 'name': Z3}
     - { 'x': 700, 'y': 100, 'name': U2}
+    
     - { 'x': 200, 'y': 500, 'name': U5}
-    - { 'x': 450, 'y': 500, 'name': U6}
-    - { 'x': 700, 'y': 500, 'name': Z1}
+    - { 'x': 450, 'y': 500, 'name': Z6}
+    - { 'x': 700, 'y': 500, 'name': U1}
   - name: Annahme
     players:
-    - { 'x': 040, 'y': 100, 'name': Z4}
-    - { 'x': 200, 'y': 100, 'name': U3}
-    - { 'x': 700, 'y': 100, 'name': U2}
-    - { 'x': 200, 'y': 500, 'name': U5}
-    - { 'x': 450, 'y': 500, 'name': U6}
-    - { 'x': 700, 'y': 500, 'name': Z1}
+    - { 'x': 150, 'y': 350, 'name': U4}
+    - { 'x': 400, 'y': 050, 'name': Z3}
+    - { 'x': 450, 'y': 350, 'name': U2}
+    
+    - { 'x': 250, 'y': 700, 'name': U5}
+    - { 'x': 650, 'y': 700, 'name': Z6}
+    - { 'x': 750, 'y': 400, 'name': U1}
   - name: Zielaufstellung
     players:
-    - { 'x': 750, 'y': 100, 'name': Z4}
-    - { 'x': 450, 'y': 100, 'name': U3}
-    - { 'x': 150, 'y': 100, 'name': U2}
+    - { 'x': 750, 'y': 100, 'name': Z3}
+    - { 'x': 150, 'y': 100, 'name': U4}
+    - { 'x': 450, 'y': 100, 'name': U2}
+
     - { 'x': 200, 'y': 700, 'name': U5}
-    - { 'x': 700, 'y': 700, 'name': U6}
-    - { 'x': 450, 'y': 450, 'name': Z1}
+    - { 'x': 700, 'y': 700, 'name': U1}
+    - { 'x': 450, 'y': 450, 'name': Z6}
 - name: Zuspieler auf II und V
   states:
   - name: Grundaufstellung
     players: 
-    - { 'x': 200, 'y': 100, 'name': Z4}
+    - { 'x': 200, 'y': 100, 'name': U4}
     - { 'x': 450, 'y': 100, 'name': U3}
-    - { 'x': 700, 'y': 100, 'name': U2}
-    - { 'x': 200, 'y': 500, 'name': U5}
+    - { 'x': 700, 'y': 100, 'name': Z2}
+    
+    - { 'x': 200, 'y': 500, 'name': Z5}
     - { 'x': 450, 'y': 500, 'name': U6}
-    - { 'x': 700, 'y': 500, 'name': Z1}
+    - { 'x': 700, 'y': 500, 'name': U1}
   - name: Annahme
     players:
-    - { 'x': 040, 'y': 100, 'name': Z4}
-    - { 'x': 200, 'y': 100, 'name': U3}
-    - { 'x': 700, 'y': 100, 'name': U2}
-    - { 'x': 200, 'y': 500, 'name': U5}
-    - { 'x': 450, 'y': 500, 'name': U6}
-    - { 'x': 700, 'y': 500, 'name': Z1}
+    - { 'x': 150, 'y': 400, 'name': U4}
+    - { 'x': 450, 'y': 400, 'name': U3}
+    - { 'x': 750, 'y': 050, 'name': Z2}
+    
+    - { 'x': 250, 'y': 700, 'name': Z5}
+    - { 'x': 650, 'y': 700, 'name': U6}
+    - { 'x': 750, 'y': 400, 'name': U1}
   - name: Zielaufstellung
     players:
-    - { 'x': 750, 'y': 100, 'name': Z4}
+    - { 'x': 750, 'y': 100, 'name': Z2}
+    - { 'x': 150, 'y': 100, 'name': U4}
     - { 'x': 450, 'y': 100, 'name': U3}
-    - { 'x': 150, 'y': 100, 'name': U2}
-    - { 'x': 200, 'y': 700, 'name': U5}
-    - { 'x': 700, 'y': 700, 'name': U6}
-    - { 'x': 450, 'y': 450, 'name': Z1}
+
+    - { 'x': 200, 'y': 700, 'name': U6}
+    - { 'x': 700, 'y': 700, 'name': U1}
+    - { 'x': 450, 'y': 450, 'name': Z5}

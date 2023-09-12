@@ -15,6 +15,7 @@
       gap: 10px;
       background-color: #2196F3;
       padding: 10px;
+      max-width: 1000px;
     }
     </style>
   <body>
@@ -23,10 +24,10 @@
       <h1 style="grid-column: 1/2;">4-2 System</h1>
       <h2 style="grid-column: 1/2;">VarianteB: Mit Zuspiel von Position2<br>Vorgezogene 6</h2>
       <div id="court" style="grid-column: 1/1; grid-row-start: span 4;"></div>
-      <select v-model="currentRot" :disabled="lock" style="grid-column: 2/2;">
+      <select v-model="currentRot" :disabled="lock" style="grid-column: 2/2; min-height: 50px;">
         <option v-for="rot in rotations" :value="rot">{{rot.name}}</option>
       </select>
-      <select v-model="currentState" :disabled="lock" style="grid-column: 2/2;">
+      <select v-model="currentState" :disabled="lock" style="grid-column: 2/2; min-height: 50px;">
         <option v-for="state in currentRot.states" :value="state">{{state.name}}</option>
       </select>
       <p style="grid-column: 1/2;">
@@ -51,7 +52,7 @@
         }
       },
       async mounted(){
-        res = await fetch("./4-2B_Front6.yml")
+        res = await fetch( window.location.href + "/4-2B_Front6.yml")
         this.rotations = jsyaml.load(await res.text())
         this.currentRot = this.rotations[0]
         await this.resetCourt()
@@ -59,11 +60,8 @@
       methods: {
         resetCourt: async function(){
           courtDiv = document.getElementById('court')
-          courtDiv.innerHTML = '';
-
-          
+          courtDiv.innerHTML = '';          
           this.court = new VBHalfCourt({ width: courtDiv.getBoundingClientRect().width-20 })
-
           courtDiv.appendChild(this.court.getSVG())
           await this.court.draw(0)
         },
@@ -75,8 +73,9 @@
           await this.court.draw(0)
         },
         movePlayers: async function() {
-          for (const p in this.currentState.players) {
-            await this.court.players[p].setPosition(this.currentState.players[p].x, this.currentState.players[p].y)
+          for (const p of this.currentState.players) {
+            drawnPlayer = this.court.players.find(e=>e.label==p.name)
+            await drawnPlayer.setPosition(p.x, p.y)
           }
           await this.court.draw(1500)
         }
